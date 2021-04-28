@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import 'react-calendar/dist/Calendar.css';
 import 'react-date-picker/dist/DatePicker.css';
 import { Input, Dropdown, Button, Icon } from 'semantic-ui-react';
-import {useRouter} from "next/router"
+import { useRouter } from "next/router"
+import { bounce } from 'react-animations'
 
+const bounceAnimation = keyframes`${bounce}`
 
 const SearchContainer = styled.div`
 max-width:1500px;
@@ -83,7 +85,7 @@ text-align:center;
 }
 `;
 
-const IconContainer=styled.div`
+const IconContainer = styled.div`
 display: flex;
 flex-direction: column;
 align-items:center;
@@ -97,9 +99,13 @@ strong{
         font-weight:400;
     }
 }
+img:hover{
+    animation:2s ${bounceAnimation};
+
+}
 
 `;
-const Iconbox=styled.div`
+const Iconbox = styled.div`
 margin-top:80px;
 width:100%;
 display:flex;
@@ -123,10 +129,10 @@ justify-content:space-evenly;
 const SearchBox = () => {
     const [search, setSearch] = useState({ date: "", location: "", catagories: "" });
     const quickSearch = [
-        { icon: '/it.svg', link: "/it", alt: "information and technology events" ,label:"IT Events"},
-        { icon: '/music.svg', link: "/music", alt: "musical and entertainment events",label:"Muscial Events"},
-        { icon: '/edu.svg', link: "/edu", alt: "Educational events", label:"Educational Events" },
-        { icon: '/food.svg', link: "/food", alt: "Food Events",label:"Foods Events" },
+        { icon: '/it.svg', link: "/it", alt: "information and technology events", label: "IT Events" },
+        { icon: '/music.svg', link: "/music", alt: "musical and entertainment events", label: "Muscial Events" },
+        { icon: '/edu.svg', link: "/edu", alt: "Educational events", label: "Educational Events" },
+        { icon: '/food.svg', link: "/food", alt: "Food Events", label: "Foods Events" },
     ]
     const categoriesOption = [
         { key: 1, value: "It", text: "IT and Technology" },
@@ -148,9 +154,9 @@ const SearchBox = () => {
             </StyleSearchWrapper>
             <StyledMessage>Quick Search By Categories</StyledMessage>
             <Iconbox>
-            {
-                quickSearch.map((item, index) => <IconContainer onClick={()=>router.push(`/events${item.link}`)}><img key={`events-icons-${index}`} src={item.icon} alt={item.alt} height={80} width={80} /><strong>{item.label}</strong></IconContainer>)
-            }
+                {
+                    quickSearch.map((item, index) => <IconContainer onClick={() => router.push(`/events${item.link}`)}><img key={`events-icons-${index}`} src={item.icon} alt={item.alt} height={80} width={80} /><strong>{item.label}</strong></IconContainer>)
+                }
             </Iconbox>
         </SearchContainer>
 
