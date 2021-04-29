@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import 'semantic-ui-css/semantic.min.css';
 import styled from 'styled-components';
-import EventCard from "@/components/EventCard"
 import EventList from "@/components/organism/eventlist";
+import Footer from "@/components/Footer"
 
 export default function Home() {
   return (
@@ -12,7 +12,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-    <EventList/>
+    {/* <EventList/> */}
+    <Footer/>
     </div>
   )
 }
