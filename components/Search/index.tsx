@@ -45,9 +45,9 @@ const StyledDatePicker = styled(DatePicker)`
     
 `;
 const StyledInput = styled(Input)`
-height:50px;
-max-width:350px;
-margin:0px 8px;
+    height:50px;
+    max-width:350px;
+    margin:0px 8px;
     width: 100%;
     font-size:18px;
     height:60px;
@@ -55,8 +55,8 @@ margin:0px 8px;
     border-radius:8px;
 `;
 const StyledDropdown = styled(Dropdown)`
-max-width:350px;
-margin:0px 8px;
+    max-width:350px;
+    margin:0px 8px;
     width: 100%;
     font-size:18px;
     height:60px;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button, Icon ,Menu,Sidebar} from 'semantic-ui-react'
+import { Button, Icon, Menu, Sidebar } from 'semantic-ui-react'
 import { SearchBox } from '../Search';
 const HeaderWrapper = styled.div`
 height:800px;
@@ -47,13 +47,13 @@ const StyledLink = styled.a`
     color:#05052e;
 }
 `;
-const StyledIcon=styled.div`
+const StyledIcon = styled.div`
 cursor: pointer;
 @media (min-width: 850px){
     display:none;
 }
 `;
-const SearchContainer=styled.div`
+const SearchContainer = styled.div`
 display:flex;
 align-items:center;
 justify-content:center;
@@ -63,7 +63,7 @@ margin-top:50px;
 
 
 const Header = () => {
-    const [showMenu,setShowMenu]=useState(false);
+    const [showMenu, setShowMenu] = useState(false);
     const headerMenu = [
         { link: "/", title: "Home" },
         { link: "/blog", title: "Blog" },
@@ -89,7 +89,7 @@ const Header = () => {
             <Container>
                 <div>
                     <Link href="/" passHref>
-                        <img src="/vercel.svg" height={120} width={200} />
+                        <img src="/vercel.svg" height={80} width={200} />
                     </Link>
                 </div>
                 <MenuWrapper>
@@ -98,26 +98,26 @@ const Header = () => {
                             <StyledLink>{item.title}</StyledLink>
                         </Link>)
                     }
-                    <Button  inverted color="green">Login</Button>
-                                     </MenuWrapper>
-                                     <StyledIcon>
-                                     <Icon onClick={()=>setShowMenu(!showMenu)} size="huge" color="yellow" name="list ul"/>
-                                     </StyledIcon>
+                    <Button inverted color="green">Login</Button>
+                </MenuWrapper>
+                <StyledIcon>
+                    <Icon onClick={() => setShowMenu(!showMenu)} size="large" color="green" name="list ul" />
+                </StyledIcon>
             </Container>
             <SearchContainer>
-            <SearchBox/>
+                <SearchBox />
             </SearchContainer>
-<Sidebar  onHide={()=>setShowMenu(false)} as={Menu} animation="overlay" visible={showMenu} width={showWide?"thin":"wide"} vertical direction="left">
-    
-{
-                        headerMenu.map((item, index) => <Menu.Item key={`event-sathi-${index}`}>
-                        <Link  href={item.link}>
+            <Sidebar onHide={() => setShowMenu(false)} as={Menu} animation="overlay" visible={showMenu} width={showWide ? "thin" : "wide"} vertical direction="left">
+
+                {
+                    headerMenu.map((item, index) => <Menu.Item key={`event-sathi-${index}`}>
+                        <Link href={item.link}>
                             <StyledLink>{item.title}</StyledLink>
                         </Link></Menu.Item>)
-                    }
-        
-    
-</Sidebar>
+                }
+
+
+            </Sidebar>
         </HeaderWrapper>
     )
 }
