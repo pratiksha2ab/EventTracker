@@ -77,7 +77,7 @@ const Header = () => {
 
     const navbarUpdate = () => {
         // console.log(window.innerWidth)
-        if (window.innerWidth < 400) {
+        if (window.innerWidth < 350) {
             setShowWide(true)
         } else {
             setShowMenu(false)

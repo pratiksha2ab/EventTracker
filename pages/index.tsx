@@ -10,6 +10,7 @@ import { BlogList } from '@/components/organism/BlogList';
 import ImageCard from '@/components/ImageCard';
 import { TopEventList } from '@/components/organism/Topevents';
 import {Footer} from '@/components/Footer';
+import { ContactUS } from '@/components/organism/Contact-us';
 const CityListContainer=styled.div`
 margin-top:120px;
 margin-bottom:100px;
@@ -32,6 +33,7 @@ export default function Home() {
         <BlogList/>
       </div>
       <TopEventList/>
+      <ContactUS/>
       <Footer/>
     </div>
   )
