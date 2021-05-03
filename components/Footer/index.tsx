@@ -55,7 +55,7 @@ const ImageContainer= Styled.div`
         font-size: 18px;
         color: #fff;
         line-height: 1.5;
-        @
+        
     }
 `;
 const StyledUsefulLinks= Styled.div`
@@ -133,10 +133,9 @@ const Footer = ()=>{
                     <Image 
                         fluid
                         src='/eventImage2.jpg' 
-                        as= 'a'
+                        as= 'img'
                         href="/"
                         size= "small"
-                        
                     />
                     <p>
                     Lorem ipsum dolor sit amet, conse ctetuers adipiscing eli sed diam nonum nibhieLorem ipsum dolor sit amet, conse ctetuers adipiscing eli sed diam nonum nibhie……
