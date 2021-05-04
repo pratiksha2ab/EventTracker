@@ -39,7 +39,7 @@ const BottomContainer= Styled.div`
    grid-template-columns: 1fr 1fr 1fr; */
    display: flex;
    flex-wrap: wrap;
-   justify-content: center;
+   justify-content: space-evenly;
    max-width: 1200px;
    width: 100%;
    margin: 0 auto;
@@ -48,7 +48,7 @@ const BottomContainer= Styled.div`
 const ImageContainer= Styled.div`
     max-width: 300px; 
     //flex: 0 1 350px;
-    margin: 20px;
+    margin-top: 30px;
     p{
         text-align: left;
         margin-top: 1.875rem;
@@ -61,7 +61,7 @@ const ImageContainer= Styled.div`
 const StyledUsefulLinks= Styled.div`
     flex: 0 1 300px;
     width: 100%;
-    margin: 20px;
+    margin-top: 30px;
     display: flex;
     flex-flow: column;
     text-align: center;
@@ -83,7 +83,7 @@ const StyledUsefulLinks= Styled.div`
 const StyledTrending= Styled.div`
     flex: 0 1 300px;
     width: 100%;
-    margin: 20px;
+    margin-top: 30px;
     display: flex;
     flex-flow: column;
     text-align: center;
@@ -138,6 +138,7 @@ const Footer = ()=>{
             <BottomContainer>
                 <ImageContainer>
                     <Image 
+                        centered
                         fluid
                         src='/eventImage2.jpg' 
                         as= 'img'
