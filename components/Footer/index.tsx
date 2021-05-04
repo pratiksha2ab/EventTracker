@@ -157,11 +157,11 @@ const Footer = ()=>{
                 </StyledUsefulLinks>
                 <StyledTrending>
                     <h1>Trending Category</h1>
-                    <Link href="#"><a>Automobiles</a></Link> 
-                    <Link href="#"><a>Club party Night</a></Link> 
-                    <Link href="#"><a>Car showroom</a></Link> 
-                    <Link href="#"><a>School Event</a></Link> 
-                    <Link href="#"><a>Gym Event</a></Link>
+                    <Link href="#"><a>Exposition</a></Link> 
+                    <Link href="#"><a>Workshop</a></Link> 
+                    <Link href="#"><a>Webinars</a></Link> 
+                    <Link href="#"><a>Interactive Performances</a></Link> 
+                    <Link href="#"><a>Conference</a></Link>
                 </StyledTrending>
             </BottomContainer>
             
