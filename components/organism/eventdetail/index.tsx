@@ -3,6 +3,9 @@ import Styled from "styled-components";
 import {Button, Icon, Image} from "semantic-ui-react"
 import Link from "next/link";
 
+const Container= Styled.div`
+    background-color: #f4f4f4;
+`;
 const BGImageContainer= Styled.div`
     min-height: 60.625rem;
     max-height: 60.625rem;
@@ -11,7 +14,7 @@ const BGImageContainer= Styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    border: 2px solid red;
+   // border: 2px solid red;
     opacity: 1;
     @media(max-width: 800){
         
@@ -26,7 +29,7 @@ const DetailWrapper= Styled.div`
     background-color: #fff;
     max-width: 700px;
     width: 100%;
-    border: 2px solid black;
+   // border: 2px solid black;
 `;
 
 const HeadWrapper= Styled.div`
@@ -132,7 +135,7 @@ const InfoWrapper= Styled.div`
 `;
 const EventDetail = () => {
     return (
-        <>
+        <Container>
         <BGImageContainer>
         </BGImageContainer>
         <DetailWrapper>
@@ -213,7 +216,7 @@ const EventDetail = () => {
             </PhotoWrapper>
         </DetailWrapper>
 
-        </>
+        </Container>
     )
 }
 
