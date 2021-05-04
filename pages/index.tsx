@@ -12,9 +12,9 @@ export default function Home() {
         <title>Event Sathi</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <EventDetail/>
+      {/* <EventDetail/> */}
     {/* <EventList/> */}
-    {/* <Footer/> */}
+    <Footer/>
     </div>
   )
 }

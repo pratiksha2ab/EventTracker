@@ -71,6 +71,9 @@ const StyledUsefulLinks= Styled.div`
         pointer: cursor;
         padding: 10px;
         font-size: 18px;
+        &:hover{
+            color: #f04700;
+        }
     }
     @media(max-width: 768px){
         display: none;
@@ -85,6 +88,9 @@ const StyledTrending= Styled.div`
     flex-flow: column;
     text-align: center;
     a{  
+        &:hover{
+            color: #f04700;
+        }
         text-decoration: none;
         color: #fff;
         pointer: cursor;
@@ -106,7 +112,7 @@ const Footer = ()=>{
                 <div>
                     <Icon 
                     name="phone"
-                    color="green"
+                    color="orange"
                     circular
                     size="large"
                     />
@@ -114,7 +120,7 @@ const Footer = ()=>{
                 </div>
                 <div>
                     <Icon name="mail"
-                    color="green"
+                    color="orange"
                     circular
                     size="large"
                     />
@@ -123,7 +129,8 @@ const Footer = ()=>{
                 <div>
                     <StyledButton
                     size= "big"
-                    color= "green"
+                    color= "orange"
+                    inverted
                     >About Us</StyledButton>
                 </div>
             </TopContainer>
