@@ -8,6 +8,7 @@ const FooterContainer= Styled.div`
  //   height: 500px;
     background-color: #171717;
     color: #fff;
+    margin-top:130px;
 
 `;
 const TopContainer= Styled.div`
@@ -15,7 +16,7 @@ const TopContainer= Styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
-    max-width: 1200px;
+    max-width: 1440px;
     width: 100%;
     margin: 0 auto;
     div{
@@ -44,6 +45,7 @@ const BottomContainer= Styled.div`
    width: 100%;
    margin: 0 auto;
    padding: 15px;
+   
 `;
 const ImageContainer= Styled.div`
     max-width: 300px; 
@@ -96,6 +98,9 @@ const StyledTrending= Styled.div`
         pointer: cursor;
         padding: 10px;
         font-size: 18px;
+    }
+    @media(max-width: 768px){
+        margin: 0 auto;
     }
 
 `;
@@ -177,4 +182,4 @@ const Footer = ()=>{
     )
 }
 
-export default Footer;
+export  {Footer};
