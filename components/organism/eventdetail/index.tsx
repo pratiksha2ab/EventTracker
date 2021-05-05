@@ -5,10 +5,12 @@ import Link from "next/link";
 
 const Container= Styled.div`
     background-color: #f4f4f4;
+    margin-bottom: 80px;
+    border-bottom: 1px solid;
 `;
 const BGImageContainer= Styled.div`
-    min-height: 60.625rem;
-    max-height: 60.625rem;
+    min-height: 50.625rem;
+    max-height: 50.625rem;
     width: 100%;
     background-image: url('event.jpg');
     background-repeat: no-repeat;
@@ -16,20 +18,23 @@ const BGImageContainer= Styled.div`
     background-position: center;
    // border: 2px solid red;
     opacity: 1;
-    @media(max-width: 800){
+    @media(max-width: 800px){
+        height:550px;
+        min-height:auto;
         
     }
 `;
 
 const DetailWrapper= Styled.div`
-    @media(min-width: 800px){
-        margin-left: 200px;
-    }
-    margin-top: -400px;
+  
     background-color: #fff;
-    max-width: 700px;
+    max-width: 1250px;
     width: 100%;
-   // border: 2px solid black;
+    margin:0 auto;
+    margin-top: -120px;
+    
+    padding:20px;
+  
 `;
 
 const HeadWrapper= Styled.div`
@@ -41,7 +46,7 @@ const HeadWrapper= Styled.div`
         letter-spacing: 1.2px;
         line-height: 1.2;
         text-decoration: underline;
-        text-decoration-color: lightblue;
+        
         @media(max-width: 800px){
             font-size: 2rem;
             letter-spacing: 0px;
@@ -172,7 +177,7 @@ const EventDetail = () => {
                 <HeadWrapper>
                     <h1>Who's Speaking?</h1>
                 </HeadWrapper>
-                <Image fluid centered src="/speaker.png"/>
+                <Image fluid centered src="/speaker.PNG"/>
             </PhotoWrapper>
             <LocationWrapper>
                 <HeadWrapper>
@@ -212,7 +217,7 @@ const EventDetail = () => {
                 <HeadWrapper>
                     <h1>Our Sponsors</h1>
                 </HeadWrapper>
-                <Image fluid centered src="/sponsor.png"/>
+                <Image fluid centered src="/sponsor.PNG"/>
             </PhotoWrapper>
         </DetailWrapper>
 
