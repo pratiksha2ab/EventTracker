@@ -32,7 +32,6 @@ export default function Home() {
       <div style={{background:'#ddd9d9',padding:30}}>
         <BlogList/>
       </div>
-      <TopEventList/>
       <ContactUS/>
       <Footer/>
     </div>
