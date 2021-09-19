@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
-import { Button, Form, Input, TextArea } from 'semantic-ui-react';
+import { Button, Form, Input, TextArea,Message } from 'semantic-ui-react';
 import styled from 'styled-components';
+import {API} from '../../../utils/api';
+
 
 const Container = styled.div`
 background-color:#ebfdfb;
@@ -37,6 +39,7 @@ margin-left:12px !important;
 
 const ContactUS = () => {
     const [loading, setLoading]=useState(false)
+    const[isFormSubmitted, setIsFormSubmitted]=useState(false)
     const validationSchema = yup.object().shape({
         email: yup
           .string()
@@ -47,9 +50,16 @@ const ContactUS = () => {
         message:yup.string().required("Message is required")
         
       });
-      const handleSubmit=()=>{
+      const handleSubmit=async()=>{
           setLoading(true)
-          setTimeout(() =>{setLoading(false);formik.resetForm()},3000)
+         try {
+             await API.post("/contact",formik.values)
+            setIsFormSubmitted(true)
+             
+         } catch (error) {
+             
+         }
+         setLoading(false)
 
       }
  const formik=useFormik({
@@ -69,7 +79,7 @@ const ContactUS = () => {
         <FormWrapper>
             
             <h3>Contact Us</h3>
-            <Form onSubmit={formik.handleSubmit}>
+            { isFormSubmitted==false?<Form onSubmit={formik.handleSubmit}>
                 <Form.Group widths="equal">
                     
                     <InputForm error={formik.touched.email && formik.errors.email?true:false} size="large" name="email" onBlur={formik.handleBlur} fluid label="Email Address" value={formik.values.email} onChange={formik.handleChange}/>
@@ -94,7 +104,12 @@ const ContactUS = () => {
 <Form.Group>
     <StyledButton loading={loading} htmlType="submit" secondary>Submit</StyledButton>
 </Form.Group>
-            </Form>
+            </Form>:<Message positive>
+    <Message.Header>Thank you for contacting us</Message.Header>
+    <p>
+      Our team will contact you soon.
+    </p>
+  </Message>}
             
         </FormWrapper>
         </Container>

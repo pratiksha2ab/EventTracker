@@ -11,6 +11,7 @@ import ImageCard from '@/components/ImageCard';
 import { TopEventList } from '@/components/organism/Topevents';
 import {Footer} from '@/components/Footer';
 import { ContactUS } from '@/components/organism/Contact-us';
+import { SubmitEvent } from '@/components/organism/submit';
 const CityListContainer=styled.div`
 margin-top:120px;
 margin-bottom:100px;
