@@ -137,7 +137,7 @@ const EventDetail = () => {
                 <HeadWrapper>
                     <h1>ABOUT EVENT</h1>
                 </HeadWrapper>
-                <p>{detailInfo?.eventSummary}</p>
+                <p>{detailInfo?.eventDescription}</p>
             </AboutWrapper>
             </>}
         </DetailWrapper>
