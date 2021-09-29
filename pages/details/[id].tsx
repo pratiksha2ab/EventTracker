@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Styled from "styled-components";
-import {Button, Loader} from "semantic-ui-react"
-import { API } from 'utils/api';
-import { useRouter } from 'next/router';
+import { Button, Loader } from "semantic-ui-react";
+import { API } from "utils/api";
+import { useRouter } from "next/router";
 
-const DetailWrapper= Styled.div`
+const DetailWrapper = Styled.div`
     margin:0 auto;
     margin:24px;
     margin-top:50px;
@@ -13,7 +13,7 @@ const DetailWrapper= Styled.div`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-const HeadWrapper= Styled.div`
+const HeadWrapper = Styled.div`
     padding: 20px;
     h1{
         font-size: 2.5rem;
@@ -37,12 +37,12 @@ const HeadWrapper= Styled.div`
     }
 `;
 
-const BodyWrapper= Styled.div`
+const BodyWrapper = Styled.div`
    padding: 10px 20px;
    border-bottom: 1px solid lightgray;
 `;
 
-const BodyItem= Styled.div`
+const BodyItem = Styled.div`
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -59,7 +59,7 @@ const BodyItem= Styled.div`
     }
 `;
 
-const ButtonContainer= Styled.div`
+const ButtonContainer = Styled.div`
     padding: 25px 0px 15px 0px;
     display: flex;
     @media(max-width: 800px){
@@ -67,7 +67,7 @@ const ButtonContainer= Styled.div`
     }
 `;
 
-const AboutWrapper= Styled.div`
+const AboutWrapper = Styled.div`
     p{
         text-align: justify;
         text-justify: inter-word;
@@ -78,71 +78,88 @@ const AboutWrapper= Styled.div`
     }
      border-bottom: 1px solid lightgray;
 `;
-const LoadingWrapper=Styled.div`
+const LoadingWrapper = Styled.div`
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 `;
 const EventDetail = () => {
-    const router=useRouter()
-    const {id}=router.query
-    const[detailInfo,setDetailInfo]=useState<any>();
-    const[loading,setLoading]=useState(false);
-    const getDetailsInformationFromAPI=async()=>{
-        setLoading(true)
-        try {
-            const response:any=await API.get(`/event/${id}`)
-            console.log('abc',response)
-            setDetailInfo(response)
-        } catch (error) {
-            
-        }
-        setLoading(false)
-        
-    
-    }
-    useEffect(()=>{
-      getDetailsInformationFromAPI()
-    },[id])
-    console.log('abccc',id)
+  const router = useRouter();
+  const { id } = router.query;
+  const [detailInfo, setDetailInfo] = useState<any>();
+  const [loading, setLoading] = useState(false);
+  const getDetailsInformationFromAPI = async () => {
+    setLoading(true);
+    try {
+      const response: any = await API.get(`/event/${id}`);
+      console.log("abc", response);
+      setDetailInfo(response);
+    } catch (error) {}
+    setLoading(false);
+  };
+  useEffect(() => {
+    getDetailsInformationFromAPI();
+  }, [id]);
+  console.log("abccc", id);
 
-    return (
-     
-       <DetailWrapper>  { loading?<LoadingWrapper><Loader active size="medium"/></LoadingWrapper>:   <>
+  return (
+    <DetailWrapper>
+      {" "}
+      {loading ? (
+        <LoadingWrapper>
+          <Loader active size="medium" />
+        </LoadingWrapper>
+      ) : (
+        <>
+          <HeadWrapper>
+            <h1>{detailInfo?.eventTitle}</h1>
+            <p>
+              {detailInfo?.startDate} to {detailInfo?.endDate}{" "}
+              <span>{detailInfo?.Address}</span>
+            </p>
+          </HeadWrapper>
+
+          <BodyWrapper>
+            <BodyItem>
+              <p>location:</p>
+              <span>{detailInfo?.venueName}</span>
+            </BodyItem>
+            <BodyItem>
+              <p>email:</p>
+              <span>{detailInfo?.organizationEmail}</span>
+            </BodyItem>
+            <BodyItem>
+              <p>organization name:</p>
+              <span>{detailInfo?.organizationName}</span>
+            </BodyItem>
+            <ButtonContainer>
+              <Button
+                onClick={() =>
+                  router.push({
+                    pathname: "/register-event",
+                    query: { name: detailInfo?.eventTitle, id: detailInfo?.id,image:detailInfo?.Banner },
+                  })
+                }
+                inverted
+                color="orange"
+                size="big"
+              >
+                Join Event{" "}
+              </Button>
+            </ButtonContainer>
+          </BodyWrapper>
+
+          <AboutWrapper>
             <HeadWrapper>
-                <h1>{detailInfo?.eventTitle}</h1>
-                <p>{detailInfo?.startDate} to {detailInfo?.endDate} <span>{detailInfo?.Address}</span></p>
-            </HeadWrapper> 
+              <h1>ABOUT EVENT</h1>
+            </HeadWrapper>
+            <p>{detailInfo?.eventSummary}</p>
+          </AboutWrapper>
+        </>
+      )}
+    </DetailWrapper>
+  );
+};
 
-            <BodyWrapper>
-               <BodyItem>
-                   <p>location:</p>
-                   <span>{detailInfo?.venueName}</span>
-               </BodyItem>
-               <BodyItem>
-                   <p>email:</p>
-                   <span>{detailInfo?.organizationEmail}</span>
-               </BodyItem>
-               <BodyItem>
-                   <p>organization name:</p>
-                   <span>{detailInfo?.organizationName}</span>
-               </BodyItem>
-                <ButtonContainer>
-                    <Button  onClick={()=>router.push('/register-event')} inverted color="orange" size="big">Join Event </Button>
-                </ButtonContainer>
-            </BodyWrapper>  
-
-            <AboutWrapper>
-                <HeadWrapper>
-                    <h1>ABOUT EVENT</h1>
-                </HeadWrapper>
-                <p>{detailInfo?.eventSummary}</p>
-            </AboutWrapper>
-            </>}
-        </DetailWrapper>
-        
-    )
-}
-
-export default EventDetail
+export default EventDetail;
