@@ -2,6 +2,7 @@ import React from 'react';
 import Styled from "styled-components";
 import {Button, Icon, Image} from "semantic-ui-react"
 import Link from "next/link";
+import router from 'next/router';
 
 const Container= Styled.div`
     background-color: #f4f4f4;
@@ -163,7 +164,7 @@ const EventDetail = () => {
                    <span><Link href="#">www.event-sathi.com</Link></span>
                </BodyItem>
                 <ButtonContainer>
-                    <Button inverted color="orange" size="big">Join Event</Button>
+                    <Button  inverted color="orange" size="big">Join Event </Button>
                 </ButtonContainer>
             </BodyWrapper>  
 

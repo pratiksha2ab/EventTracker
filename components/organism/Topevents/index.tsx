@@ -1,4 +1,6 @@
 import ImageCard from '@/components/ImageCard'
+import { useState,useEffect } from 'react';
+import { API } from 'utils/api';
 import React from 'react';
 import styled from 'styled-components';
 const EventWrapper = styled.div`
@@ -32,15 +34,34 @@ const Container = styled.div`
  `;
 
 const TopEventList = () => {
+    const[eventsList,setEventsList]=useState([]);
+    const[loading,setLoading]=useState(false);
+    const getListInformationFromAPI=async()=>{
+        setLoading(true)
+        try {
+            const response:any=await API.get("/event")
+            console.log('abc',response)
+            setEventsList(response)
+        } catch (error) {
+            
+        }
+        setLoading(false)
+        
+    
+    }
+    useEffect(()=>{
+      getListInformationFromAPI()
+    },[])
+    
     return (
 
         <div >
             <Container>Upcoming Top Events</Container>
             <EventWrapper >
                 {
-                    Array.from(Array(6)).map((item, index) =>
-                        <ImageCard key={index} image="/2.jpg" title={"Google I/O 2021"} location={"Kathmandu Nepal"}
-                            date={"2020-01-02"}
+                    eventsList?.map((item, index) =>
+                        <ImageCard key={index} image={item?.Banner} title={item?.eventTitle} location={item?.Address}
+                            date={`${item?.startDate} to ${item?.endDate}`} id={item?.id}
                         />)
                 }
 
@@ -50,3 +71,6 @@ const TopEventList = () => {
     )
 }
 export { TopEventList }
+
+
+

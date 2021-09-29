@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button, Icon, Menu, Sidebar } from 'semantic-ui-react'
 import { SearchBox } from '../Search';
+import { AuthContext } from 'utils/authcontext';
+import { firebase } from 'utils/firebase';
+import router from 'next/router';
+
 const HeaderWrapper = styled.div`
 height:800px;
    background-image:url("/mountain.png");
@@ -13,7 +17,17 @@ padding:0px 80px;
 @media (max-width: 850px){
     height:800px;
     padding:0px 30px;
+
 }
+ & .usermail{
+     color:#fff;
+ }
+ & span{
+     color:#19b2ff;
+     font-weight:500;
+     padding-left:8px;
+     cursor:pointer;
+ }
    
 `;
 const Container = styled.div`
@@ -64,10 +78,13 @@ margin-top:50px;
 
 const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
+    const {user,setUser}= useContext(AuthContext)
+
     const headerMenu = [
         { link: "/", title: "Home" },
-        { link: "/blog", title: "Blog" },
-        { link: "/submit-event", title: "Submit Event" },
+        { link: "/blogdetail", title: "Blog" },
+        { link: "/submit", title: "Submit Event" },
+        
 
     ]
     const [showWide, setShowWide] = useState(true);
@@ -89,7 +106,7 @@ const Header = () => {
             <Container>
                 <div>
                     <Link href="/" passHref>
-                        <img src="/vercel.svg" height={80} width={200} />
+                        <img src="/eventlogo.png" height={100} width={250} />
                     </Link>
                 </div>
                 <MenuWrapper>
@@ -98,7 +115,7 @@ const Header = () => {
                             <StyledLink>{item.title}</StyledLink>
                         </Link>)
                     }
-                    <Button inverted color="green">Login</Button>
+                   { user?<div><strong className={"usermail"}>{user?.email}</strong> <span onClick={()=>{firebase.auth().signOut();setUser(null);router.push("/")}}>Logout</span></div>: <Button onClick={()=>{router.push("/login")}} inverted color="green">Login</Button>}
                 </MenuWrapper>
                 <StyledIcon>
                     <Icon onClick={() => setShowMenu(!showMenu)} size="large" color="green" name="list ul" />

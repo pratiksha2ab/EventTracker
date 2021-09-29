@@ -38,23 +38,24 @@ const StyledButton=styled(Button)`
 margin-left:12px !important;
 `;
 
-const ContactUS = () => {
+const RegisterEvent = () => {
     const [loading, setLoading]=useState(false)
     const[isFormSubmitted, setIsFormSubmitted]=useState(false)
     const validationSchema = yup.object().shape({
+        fullname:yup.string().required("Full Name is required"),
+        phone:yup.string().required("phone number is required"),
         email: yup
           .string()
           .email("Invalid Email")
           .required("Email is required"),
 
-        name:yup.string().required("Full Name is required"),
-        message:yup.string().required("Message is required")
+        
         
       });
       const handleSubmit=async()=>{
           setLoading(true)
          try {
-             await API.post("/contact",formik.values)
+             await API.post("/register",formik.values)
             setIsFormSubmitted(true)
             router.reload()
              
@@ -66,9 +67,10 @@ const ContactUS = () => {
       }
  const formik=useFormik({
      initialValues:{
+         fullname:"",
+         phone:"",
          email:"",
-         name:"",
-         message:"",
+         
       
      },
      validationSchema,
@@ -80,43 +82,46 @@ const ContactUS = () => {
         <Container>
         <FormWrapper>
             
-            <h3>Contact Us</h3>
+            <h3>Register for Event</h3>
             { isFormSubmitted==false?<Form onSubmit={formik.handleSubmit}>
+                
+                <Form.Group widths="equal">
+                    
+                    <InputForm error={formik.touched.fullname && formik.errors.fullname?true:false} size="large" name="fullname" onBlur={formik.handleBlur} fluid label="Full Name" value={formik.values.fullname} onChange={formik.handleChange}/>
+               
+                </Form.Group>
+                {(formik.touched.fullname && formik.errors.fullname) && <Error>{formik.errors.fullname}</Error>}
+
+                <Form.Group widths="equal">
+                    
+                    <InputForm error={formik.touched.phone && formik.errors.phone?true:false} size="large" name="phone" onBlur={formik.handleBlur} fluid label="Phone" value={formik.values.phone} onChange={formik.handleChange}/>
+               
+                </Form.Group>
+                {(formik.touched.phone && formik.errors.phone) && <Error>{formik.errors.phone}</Error>}
+
                 <Form.Group widths="equal">
                     
                     <InputForm error={formik.touched.email && formik.errors.email?true:false} size="large" name="email" onBlur={formik.handleBlur} fluid label="Email Address" value={formik.values.email} onChange={formik.handleChange}/>
                
                 </Form.Group>
                 {(formik.touched.email && formik.errors.email) && <Error>{formik.errors.email}</Error>}
-                <Form.Group widths="equal">
-                    
-                    <InputForm error={formik.touched.name && formik.errors.name?true:false} size="large" name="name" onBlur={formik.handleBlur} fluid label="Full Name" value={formik.values.name} onChange={formik.handleChange}/>
-               
-                </Form.Group>
-                {(formik.touched.name && formik.errors.name) && <Error>{formik.errors.name}</Error>}
-
-                <Form.Group widths="equal">
-                    
-                    <Form.TextArea error={formik.touched.message && formik.errors.message?true:false} size="large" name="message" onBlur={formik.handleBlur} fluid label="Message" value={formik.values.message} onChange={formik.handleChange}/>
-               
-                </Form.Group>
-                {(formik.touched.message && formik.errors.message) && <Error>{formik.errors.message}</Error>}
 
 
 <Form.Group>
-    <StyledButton loading={loading} htmlType="submit" secondary>Submit</StyledButton>
+    <StyledButton  loading={loading} htmlType="submit" secondary>Submit</StyledButton>
 </Form.Group>
             </Form>:<Message positive>
-    <Message.Header>Thank you for contacting us</Message.Header>
+    <Message.Header>Thank you for submitting </Message.Header>
     <p>
       Our team will contact you soon.
     </p>
-    
   </Message>}
             
         </FormWrapper>
+     
         </Container>
+         
     )
 }
 
-export  {ContactUS}
+export  {RegisterEvent}

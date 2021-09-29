@@ -5,6 +5,7 @@ import { Button, Form, Input, TextArea,Message} from 'semantic-ui-react';
 import styled from 'styled-components';
 import {API} from '../../../utils/api';
 import ImageUploading from 'react-images-uploading';
+import router from 'next/router';
 
 
 const Container = styled.div`
@@ -15,7 +16,7 @@ const FormWrapper=styled.div`
  width:100%;
  margin:0 auto;
  padding:40px;
- margin-top:150px;
+ 
  
  /* & .ui.form .fields{
      flex-direction:column !important;
@@ -35,63 +36,96 @@ const InputForm=styled(Form.Input)`
 display:block;
 `;
 const StyledButton=styled(Button)`
+margin-top:50px !important;
 margin-left:12px !important;
 `;
 
 const SubmitEvent = () => {
     const [loading, setLoading]=useState(false)
     const[isEventSubmitted, setIsEventSubmitted]=useState(false)
-    const[images,setImages]=useState()
+    const [images, setImages] = useState([]);
+    const [imageFile, setImageFile] = useState();
+    const maxNumber = 1;
     const validationSchema = yup.object().shape({
    
        
         eventName:yup.string().required("Event Name is required"),
-        eventDescription:yup.string().required("Event Description is required"),
-        venueName:yup.string().required(""),
+        eventType:yup.string().required("Event type is required"),
+        venueName:yup.string().required("Venue Name is required"),
         address:yup.string().required("Address is required"),
+        eventSummary:yup.string().required("Event Summary is required"),
+        eventDescription:yup.string().required("Event Description is required"),
+        startDate:yup.string().required("Start date is required"),
+        endDate:yup.string().required("End date is required"),
         organizationName:yup.string().required(""),
         email:yup
         .string()
         .email("Invalid Email")
         .required("Email is required"),
-        eventBanner:yup.string().required("")
+        
        
         
       });
+     
       const handleEventSubmit=async()=>{
           setLoading(true)
+          console.log("abc")
+          const formData=new FormData();
+        formData.append('eventTitle',formik.values.eventName)
+        formData.append('eventType',formik.values.eventType)
+        formData.append('venueName',formik.values.venueName)
+        formData.append('Address',formik.values.address)
+        formData.append('eventSummary',formik.values.eventSummary)
+        formData.append('eventDescription',formik.values.eventDescription)
+        formData.append('startDate',formik.values.startDate)
+        formData.append('endDate',formik.values.endDate)
+        formData.append('organizationName',formik.values.organizationName)
+        formData.append('organizationEmail',formik.values.email)
+        formData.append('Banner',imageFile)
+
           try {
-              await API.post("/event",formik.values)
+              await API.post("/event",formData)
               setIsEventSubmitted(true)
+              router.reload()
           } catch (error) {
               
           }
           setLoading(false)
 
       }
-
-
-       
       const formik=useFormik({
         initialValues:{
             eventName:"",
-            eventDescription:"",
+            eventType:"",
             venueName:"",
-            address:"",
+            eventDescription:"",
+             address:"",
+             eventSummary:"",
             organizationName:"",
             email:"",
-            eventBanner:""
+            startDate:"",
+            endDate:""
+         
          
         },
         validationSchema,
         onSubmit:handleEventSubmit,
    
     })
-    const handleImage=()=>{
 
-    }
+      const onChange = (imageList, addUpdateIndex) => {
+        // data for submit
+        console.log("image=======>", imageList[0]?.file);
+        setImageFile(imageList[0]?.file);
+        setImages(imageList);
+      };
+
+
+       
+     
+  
    
-
+    console.log(formik.errors)
     return (
         <Container>
         <FormWrapper>
@@ -104,7 +138,13 @@ const SubmitEvent = () => {
                
                 </Form.Group>
                 {(formik.touched.eventName && formik.errors.eventName) && <Error>{formik.errors.eventName}</Error>}
-
+                  
+                <Form.Group widths="equal">
+                    
+                    <InputForm error={formik.touched.eventType && formik.errors.eventType?true:false} size="large" name="eventType" onBlur={formik.handleBlur} fluid label="Event Type" value={formik.values.eventType} onChange={formik.handleChange}/>
+               
+                </Form.Group>
+                {(formik.touched.eventType && formik.errors.eventType) && <Error>{formik.errors.eventType}</Error>}
                 <Form.Group widths="equal">
                     
                     <Form.TextArea error={formik.touched.eventDescription && formik.errors.eventDescription?true:false} size="large" name="eventDescription" onBlur={formik.handleBlur} fluid label="Event Description" value={formik.values.eventDescription} onChange={formik.handleChange}/>
@@ -112,7 +152,12 @@ const SubmitEvent = () => {
                 </Form.Group>
                 {(formik.touched.eventDescription && formik.errors.eventDescription) && <Error>{formik.errors.eventDescription}</Error>}
 
+                <Form.Group widths="equal">
+                    
+                    <Form.TextArea error={formik.touched.eventSummary && formik.errors.eventSummary?true:false} size="large" name="eventSummary" onBlur={formik.handleBlur} fluid label="Event Summary" value={formik.values.eventSummary} onChange={formik.handleChange}/>
                
+                </Form.Group>
+                {(formik.touched.eventSummary && formik.errors.eventSummary) && <Error>{formik.errors.eventSummary}</Error>}
 
                 <Form.Group widths="equal">
                     
@@ -143,57 +188,60 @@ const SubmitEvent = () => {
                 </Form.Group>
                 {(formik.touched.email && formik.errors.email) && <Error>{formik.errors.email}</Error>}
 
-                <Form.Group  >
-                 <strong> Event Image</strong> <br/>
-                <ImageUploading 
-                        multiple
-                        value={images}
-                        onChange={handleImage}
-                        
-                        dataURLKey="data_url"
-        
-        
-                >
-                 {({
+                <Form.Group widths="equal">
+                    
+                    <InputForm error={formik.touched.startDate && formik.errors.startDate?true:false} size="large" name="startDate" onBlur={formik.handleBlur} fluid label="Start Date" value={formik.values.startDate} onChange={formik.handleChange}/>
+               
+                </Form.Group>
+                {(formik.touched.startDate && formik.errors.startDate) && <Error>{formik.errors.startDate}</Error>}
+                   
+                <Form.Group widths="equal">
+                    
+                    <InputForm error={formik.touched.endDate && formik.errors.endDate?true:false} size="large" name="endDate" onBlur={formik.handleBlur} fluid label="End Date" value={formik.values.endDate} onChange={formik.handleChange}/>
+               
+                </Form.Group>
+                {(formik.touched.endDate && formik.errors.endDate) && <Error>{formik.errors.endDate}</Error>}
+                
+                 <div>Event Image </div>
+                 <ImageUploading 
+        value={images}
+        onChange={onChange}
+        maxNumber={maxNumber}
+        dataURLKey="data_url"
+      >
+        {({
           imageList,
           onImageUpload,
-          onImageRemoveAll,
+
           onImageUpdate,
-          onImageRemove,
-          isDragging,
-          dragProps
+          onImageRemove
         }) => (
           // write your building UI
-          <div className="upload__image-wrapper">
-            <button
-              style={isDragging ? { color: "red" } : null}
-              onClick={onImageUpload}
-              {...dragProps}
-            >
-              Click or Drop here
-            </button>
+          <div className="upload__image-wrapper" >
+            <button type="button" onClick={()=>onImageUpload()}>Upload Image</button>
             &nbsp;
-            <button onClick={onImageRemoveAll}>Remove all images</button>
             {imageList.map((image, index) => (
               <div key={index} className="image-item">
-                <img src={image.data_url} alt="" width="100" />
+                <img src={image["data_url"]} alt="" width="100" />
                 <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>Update</button>
-                  <button onClick={() => onImageRemove(index)}>Remove</button>
+                  <Button onClick={() => onImageUpdate(index)}>Update</Button>
+                  <Button
+                    icon="delete"
+                    color="red"
+                    
+                    onClick={() => onImageRemove(index)}
+                  />
                 </div>
               </div>
             ))}
           </div>
         )}
       </ImageUploading>
-    
   
-                </Form.Group>
-                {(formik.touched.eventBanner && formik.errors.eventBanner) && <Error>{formik.errors.eventBanner}</Error>}
-
+               
 
 <Form.Group>
-    <StyledButton loading={loading} htmlType="submit" secondary>Submit</StyledButton>
+    <StyledButton loading={loading}  secondary>Submit</StyledButton>
 </Form.Group>
 </Form>:<Message positive>
     <Message.Header>Thank you for submitting event</Message.Header>

@@ -1,10 +1,9 @@
-import { SubmitEvent } from '@/components/organism/submit'
+import { RegisterEvent } from '@/components/organism/register';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect } from 'react'
 import { AuthContext } from 'utils/authcontext';
 import {API} from '../../utils/api';
-
-function SubmitEventForm() {
+function SubmitRegisterForm() {
     const router=useRouter();
     const {user}=useContext(AuthContext);
 
@@ -15,9 +14,9 @@ function SubmitEventForm() {
     },[user])
     return (
         <div>
-            <SubmitEvent/>
+            <RegisterEvent/>
         </div>
     )
 }
 
-export default SubmitEventForm
+export default SubmitRegisterForm

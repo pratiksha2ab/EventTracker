@@ -1,6 +1,9 @@
 import { BlogCard } from '@/components/BlogCard';
+import { useState,useEffect } from 'react';
 import React from 'react';
 import styled from 'styled-components';
+import { API } from 'utils/api';
+import { useRouter } from 'next/router';
 const ListContainer = styled.div`
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
@@ -27,16 +30,35 @@ color: rgba(207,67,40,1);
 }
 `;
 const BlogList = () => {
-    const blogList = [{ image: "/mountain.png", date: "2017-01-01", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", title: "Next js" },
-    { image: "/mountain.png", date: "2017-01-01", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", title: "Next js" },
-    { image: "/mountain.png", date: "2017-01-01", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", title: "Next js" }]
+    const[blogsList,setBlogsList]=useState([]);
+    const[loading,setLoading]=useState(false);
+    const router=useRouter()
+    const getBlogListInformationFromAPI=async()=>{
+        setLoading(true)
+        try {
+            const response:any=await API.get("/blog")
+            console.log('abc',response)
+            setBlogsList(response)
+        } catch (error) {
+            
+        }
+        setLoading(false)
+        
+    
+    }
+    useEffect(()=>{
+        getBlogListInformationFromAPI()
+    },[])
+
+
+   
     return (
         <>
         <TitleBox>Read Our Blogs</TitleBox>
         <ListContainer>
             
             {
-                blogList.map((item, index) => <BlogCard key={`blog-${index}`} image={item.image} date={item.date} title={item.title} description={item.description} />)
+                blogsList.map((item, index) => <BlogCard onClick={()=>{router.push(`/blogdetail/${item.id}`)}} key={`blog-${index}`} image={item.image||"/mountain.png"} date={item?.date} title={item?.blogTitle} description={item.description}   />)
             }
 
         </ListContainer>

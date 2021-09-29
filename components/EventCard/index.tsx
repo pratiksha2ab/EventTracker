@@ -6,7 +6,7 @@ const StyledContainer = styled.div`
     width: 350px;
 
     & .header{
-    font-size: 28px !important;
+    font-size: 18px !important;
     line-height: 1.2 !important;
     color: #2F2F2F;
     font-family: Jost !important;

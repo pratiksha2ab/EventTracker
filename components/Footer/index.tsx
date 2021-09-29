@@ -121,7 +121,7 @@ const Footer = ()=>{
                     circular
                     size="large"
                     />
-                    <p>Free support: <span>+977 9849788407</span></p>
+                    <p>Free support: <span>+977 9866329606</span></p>
                 </div>
                 <div>
                     <Icon name="mail"
@@ -151,8 +151,7 @@ const Footer = ()=>{
                         size= "small"
                     />
                     <p>
-                    Lorem ipsum dolor sit amet, conse ctetuers adipiscing eli sed diam nonum nibhieLorem ipsum dolor sit amet, conse ctetuers adipiscing eli sed diam nonum nibhie……
-                    </p>
+                    It is the platform to provide all the details of the event happening anywhere in Nepal.</p>
                     <SocialIconsWrapper>
                          <Icon name="facebook f" size="large" color="grey"/>
                          <Icon name="twitter" size="large" color="grey"/>

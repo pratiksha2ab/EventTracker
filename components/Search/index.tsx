@@ -143,7 +143,7 @@ const SearchBox = () => {
     const router = useRouter();
     return (
         <SearchContainer>
-            <StyleSearchWrapper>
+            {/* <StyleSearchWrapper>
                 <StyledDatePicker value={search.date} onChange={e => setSearch({ ...search, date: e })} monthAriaLabel="date" monthPlaceholder="month" yearPlaceholder="year" dayPlaceholder="day" label="Select Date From" />
                 <StyledInput value={search.location} onChange={e => setSearch({ ...search, location: e.target.value })} placeholder="Enter Location" />
                 <StyledDropdown fluid selection placeholder="All Categories" options={categoriesOption} />
@@ -151,7 +151,7 @@ const SearchBox = () => {
                     <Icon name="search" />   Discover Now
 
                 </StyeldSearchButton>
-            </StyleSearchWrapper>
+            </StyleSearchWrapper> */}
             <StyledMessage>Quick Search By Categories</StyledMessage>
             <Iconbox>
                 {

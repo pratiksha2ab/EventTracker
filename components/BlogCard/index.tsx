@@ -34,18 +34,22 @@ interface BlogProps {
     date?: string;
     description?: string;
     title?: string;
+    onClick?:any
+    
 
 }
 const BlogCard = (props: BlogProps) => {
     return (
         <CardContainer>
             <StyledCard
-                fluid
-                href={"https://github.com"}
+                // fluid
+                // href={"https://github.com"}
                 image={props.image}
                 header={props.title}
                 meta={props.date}
-                description={props.description} />
+                description={props.description}
+                onClick={props.onClick}
+                 />
         </CardContainer>
     )
 }

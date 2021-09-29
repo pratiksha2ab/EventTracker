@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import EventCard from "@/components/EventCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Styled from "styled-components";
+import { API } from 'utils/api';
 
 
 const ListContainer= Styled.div`
@@ -13,7 +14,24 @@ const ListContainer= Styled.div`
 `;
 
 const EventList = () => {
-
+    const[eventsList,setEventsList]=useState("");
+    const[loading,setLoading]=useState(false);
+    const getListInformationFromAPI=async()=>{
+        setLoading(true)
+        try {
+            const response=await API.get("/event")
+            setEventsList(response?.data[0])
+        } catch (error) {
+            
+        }
+        setLoading(false)
+        
+    
+    }
+    useEffect(()=>{
+      getListInformationFromAPI()
+    },[])
+    console.log(eventsList)
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
@@ -35,54 +53,19 @@ const EventList = () => {
     const eventlist=[
         {   
             id: "1",
-            image: "/eventImage1.jpg",
-            title: "Online Training Event",
-            description: "Learn Coding in a different way",
-            location: "Kathmandu, Nepal",
-            phone: "9849788407",
-            date: "29 April 2021",
+            eventBanner: "",
+             eventName:"",
+             eventDescription:"",
+             venueName:"",
+             address:"",
+             organizationName:"",
+             email:"",
+             date:""
+             
             
-        },
-        {   
-            id: "2",
-            image: "/eventImage2.jpg",
-            title: "Online Training Event",
-            description: "Learn Coding in a different way",
-            location: "Kathmandu, Nepal",
-            phone: "9849788407",
-            date: "29 April 2021",
-            
-        },
-        {   
-            id: "3",
-            image: "/eventImage1.jpg",
-            title: "Online Training Event",
-            description: "Learn Coding in a different way",
-            location: "Kathmandu, Nepal",
-            phone: "9849788407",
-            date: "29 April 2021",
-            
-        },
-        {   
-            id: "4",
-            image: "/eventImage1.jpg",
-            title: "Online Training Event",
-            description: "Learn Coding in a different way",
-            location: "Kathmandu, Nepal",
-            phone: "9849788407",
-            date: "29 April 2021",
-            
-        },
-        {   
-            id: "5",
-            image: "/eventImage2.jpg",
-            title: "Online Training Event",
-            description: "Learn Coding in a different way",
-            location: "Kathmandu, Nepal",
-            phone: "9849788407",
-            date: "29 April 2021",
-            
-        },
+        }
+       
+       
     ]
 
     return (
@@ -108,12 +91,12 @@ const EventList = () => {
                 {eventlist.map((items, key)=>
                 <EventCard
                     id= {items.id}
-                    image= {items.image}
-                    title= {items.title}
-                    description= {items.description}
-                    location= {items.location}
-                    phone= {items.phone}
-                    date= {items.date}
+                    image= {items.eventBanner}
+                    title= {items.eventName}
+                    description= {items.eventDescription}
+                    location= {items.venueName}
+                    date= {items.organizationName}
+                    phone= {items.date}
                 />
             )}
             </Carousel> 
@@ -121,4 +104,4 @@ const EventList = () => {
     )
 }
 
-export default EventList;
+export  {EventList};

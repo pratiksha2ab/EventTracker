@@ -15,8 +15,8 @@ const InfoBox = styled.div`
 
    h3{
        color:#fff;
-       font-size:35px;
-       padding-left:30px;
+       font-size:18px;
+       padding-left:15px;
        
    }
    span{
@@ -80,7 +80,7 @@ interface ImageCardProps{
 const ImageCard = (props:ImageCardProps) => {
     const router=useRouter();
     return (
-        <ImageCardWrapper image={props.image} onClick={()=>router.push(`/event/${props.id}`)} >
+        <ImageCardWrapper image={props.image} onClick={()=>router.push(`/details/${props.id}`)} >
 
             <InfoBox>
                 <h3>
