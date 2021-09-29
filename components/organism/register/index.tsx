@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
 import { Button, Form, Input, TextArea,Message } from 'semantic-ui-react';
 import styled from 'styled-components';
 import {API} from '../../../utils/api';
 import router from 'next/router';
+import { AuthContext } from 'utils/authcontext';
 
 
 const Container = styled.div`
@@ -37,10 +38,16 @@ display:block;
 const StyledButton=styled(Button)`
 margin-left:12px !important;
 `;
-
-const RegisterEvent = () => {
+interface EventProps{
+     name?:any;
+     id?:any;
+     imageUrl?:any;
+     type?:any;
+}
+const RegisterEvent = ({name,id,imageUrl,type}:EventProps) => {
     const [loading, setLoading]=useState(false)
-    const[isFormSubmitted, setIsFormSubmitted]=useState(false)
+    const[isFormSubmitted, setIsFormSubmitted]=useState(false);
+    const {user}=useContext(AuthContext);
     const validationSchema = yup.object().shape({
         fullname:yup.string().required("Full Name is required"),
         phone:yup.string().required("phone number is required"),
@@ -57,7 +64,7 @@ const RegisterEvent = () => {
          try {
              await API.post("/register",formik.values)
             setIsFormSubmitted(true)
-            router.reload()
+            // router.reload()
              
          } catch (error) {
              
@@ -70,6 +77,11 @@ const RegisterEvent = () => {
          fullname:"",
          phone:"",
          email:"",
+         userId:user?.uid,
+         eventId:id,
+         eventTitle:name,
+         imageUrl:imageUrl,
+         type:type,
          
       
      },

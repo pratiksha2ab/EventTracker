@@ -110,6 +110,7 @@ const Header = () => {
                     </Link>
                 </div>
                 <MenuWrapper>
+                    <Link href="/my-event"><StyledLink>Registered</StyledLink></Link>
                     {
                         headerMenu.map((item, index) => <Link key={`event-sathi-${index}`} href={item.link}>
                             <StyledLink>{item.title}</StyledLink>

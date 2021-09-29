@@ -40,11 +40,11 @@ const InfoBox = styled.div`
    }
 `;
 const ImageCardWrapper = styled.div`
-   background-image:url(${props => props.image});
-   background-repeat:no-repeat;
-   background-size:cover;
+   /* background-image:url(${props => props.image}); */
+   /* background-repeat:no-repeat; */
+   /* background-size:contain; */
    position:relative;
-   max-width:500px;
+   max-width:400px;
    width: 100%;
    height:550px;
    cursor: pointer;
@@ -81,7 +81,7 @@ const ImageCard = (props:ImageCardProps) => {
     const router=useRouter();
     return (
         <ImageCardWrapper image={props.image} onClick={()=>router.push(`/details/${props.id}`)} >
-
+<img src={props.image} height={550} width={400}/>
             <InfoBox>
                 <h3>
                     {props.title}

@@ -39,12 +39,12 @@ const CityList = () => {
                 <Grid.Row stretched>
                     <Grid.Column>
                         <Segment>
-                            <CityCard height={500} image="/1.JPG" name="Kathmandu" />
+                            <CityCard height={500} image="/1.JPG" name="Kathmandu" code="kat" />
                         </Segment>
                     </Grid.Column>
                     <Grid.Column>
-                        <Segment><CityCard height={220} image="/2.jpg" name="Pokhara" /></Segment>
-                        <Segment><CityCard height={220} image="/3.jpg" name="Bhaktapur" /></Segment>
+                        <Segment><CityCard height={220} image="/2.jpg" name="Pokhara" code="pok" /></Segment>
+                        <Segment><CityCard height={220} image="/3.jpg" name="Bhaktapur" code="bha" /></Segment>
                     </Grid.Column>
                    
                 </Grid.Row>

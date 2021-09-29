@@ -6,7 +6,7 @@ import {API} from '../../utils/api';
 function SubmitRegisterForm() {
     const router=useRouter();
     const {user}=useContext(AuthContext);
-
+    
     useEffect(()=>{
         if(!user){
             router.push("/login")
@@ -14,7 +14,7 @@ function SubmitRegisterForm() {
     },[user])
     return (
         <div>
-            <RegisterEvent/>
+            <RegisterEvent type={router?.query?.type} imageUrl={router?.query?.image} name={router?.query?.name }id={router?.query.id}/>
         </div>
     )
 }
