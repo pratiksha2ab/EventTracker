@@ -14,7 +14,7 @@ function SubmitRegisterForm() {
     },[user])
     return (
         <div>
-            <RegisterEvent type={router.query.type} imageUrl={router?.query?.image} name={router?.query?.name }id={router?.query.id}/>
+            <RegisterEvent type={router?.query?.type} imageUrl={router?.query?.image} name={router?.query?.name }id={router?.query.id}/>
         </div>
     )
 }

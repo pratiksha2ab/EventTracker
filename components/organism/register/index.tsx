@@ -81,7 +81,7 @@ const RegisterEvent = ({name,id,imageUrl,type}:EventProps) => {
          eventId:id,
          eventTitle:name,
          imageUrl:imageUrl,
-         type:type
+         type:type,
          
       
      },

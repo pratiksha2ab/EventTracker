@@ -26,6 +26,7 @@ const MyContainer = styled.div`
     padding: 8px;
     margin-bottom: 20px;
     display: flex;
+    cursor: pointer;
     & .subCard{
         margin-left: 20px;
     }
@@ -52,7 +53,7 @@ const MyEventList = () => {
     <MyContainer>
       {event &&
         event?.map((item, id) => (
-          <div className="card" key={id}>
+          <div onClick={()=>router.push(`/details/${item?.eventId}`)} className="card" key={id}>
               <img src={item?.imageUrl || "/dummy.png"} height={120} width={120}/>
               <div className="subCard">
 

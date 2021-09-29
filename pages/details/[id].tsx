@@ -101,7 +101,7 @@ const EventDetail = () => {
   useEffect(() => {
     getDetailsInformationFromAPI();
   }, [id]);
-  console.log("abccc", id);
+  console.log("abccc", detailInfo?.eventType);
 
   return (
     <DetailWrapper>
@@ -138,7 +138,12 @@ const EventDetail = () => {
                 onClick={() =>
                   router.push({
                     pathname: "/register-event",
-                    query: { name: detailInfo?.eventTitle, id: detailInfo?.id,image:detailInfo?.Banner },
+                    query: {
+                      type: detailInfo?.eventType,
+                      name: detailInfo?.eventTitle,
+                      id: detailInfo?.id,
+                      image: detailInfo?.Banner,
+                    },
                   })
                 }
                 inverted

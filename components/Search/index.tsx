@@ -129,10 +129,10 @@ justify-content:space-evenly;
 const SearchBox = () => {
     const [search, setSearch] = useState({ date: "", location: "", catagories: "" });
     const quickSearch = [
-        { icon: '/it.svg', link: "/it", alt: "information and technology events", label: "IT Events" },
-        { icon: '/music.svg', link: "/music", alt: "musical and entertainment events", label: "Muscial Events" },
-        { icon: '/edu.svg', link: "/edu", alt: "Educational events", label: "Educational Events" },
-        { icon: '/food.svg', link: "/food", alt: "Food Events", label: "Foods Events" },
+        { icon: '/it.svg', link: "te", alt: "information and technology events", label: "IT Events" },
+        { icon: '/music.svg', link: "mu", alt: "musical and entertainment events", label: "Muscial Events" },
+        { icon: '/edu.svg', link: "edu", alt: "Educational events", label: "Educational Events" },
+        { icon: '/food.svg', link: "fo", alt: "Food Events", label: "Foods Events" },
     ]
     const categoriesOption = [
         { key: 1, value: "It", text: "IT and Technology" },
@@ -155,7 +155,12 @@ const SearchBox = () => {
             <StyledMessage>Quick Search By Categories</StyledMessage>
             <Iconbox>
                 {
-                    quickSearch.map((item, index) => <IconContainer onClick={() => router.push(`/events${item.link}`)}><img key={`events-icons-${index}`} src={item.icon} alt={item.alt} height={80} width={80} /><strong>{item.label}</strong></IconContainer>)
+                    quickSearch.map((item, index) => <IconContainer onClick={() => router.push({
+                       pathname: `/filter`,
+                       query:{
+                           type:item.link
+                       }
+                    })}><img key={`events-icons-${index}`} src={item.icon} alt={item.alt} height={80} width={80} /><strong>{item.label}</strong></IconContainer>)
                 }
             </Iconbox>
         </SearchContainer>

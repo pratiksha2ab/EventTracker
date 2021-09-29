@@ -9,6 +9,7 @@ interface CityCardProps {
     link?: string;
     name?: string;
     height?: number;
+    code?:any;
 
 }
 
@@ -72,16 +73,26 @@ const StyledImage = styled(Image)`
 }
 `;
 
-const CityCard = ({ image, link, name, height }: CityCardProps) => {
+const CityCard = ({ image, link, name, height,code }: CityCardProps) => {
     const router = useRouter();
     return (
-        <StyledCard href="/" height={height} raised={true}>
+        <StyledCard onClick={() => router.push({
+            pathname:"/filter",
+            query: {
+                address:code
+            }
+        })}  height={height} raised={true}>
             <StyledImage src={image} height={'100%'} width={'100%'} />
             <StyledExtra extra >
                 <CityBox>{name}</CityBox>
             </StyledExtra>
             <DiscoverBox>
-                <StyledButton onClick={() => router.push(link)} color="orange">
+                <StyledButton onClick={() => router.push({
+                    pathname:"/filter",
+                    query: {
+                        address:code
+                    }
+                })} color="orange">
                     Discover Now
             </StyledButton>
             </DiscoverBox>
